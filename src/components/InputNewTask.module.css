@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  display: flex;
+  transform: translateY(-50%);
+}
+
+.container form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.container input {
+  width: 100%;
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  padding: 16px;
+  font-size: 14px;
+  color: var(--gray-300);
+  background-color: var(--gray-500);
+  font-weight: 500;
+}
+
+.container button {
+  border: 0;
+  border-radius: 8px;
+  padding: 16px;
+  font-weight: bold;
+  color: var(--gray-100);
+  background-color: var(--blue-dark);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
