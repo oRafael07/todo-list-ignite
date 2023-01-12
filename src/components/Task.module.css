@@ -64,8 +64,8 @@
 }
 
 .checkbox input[type="checkbox"]:checked + label {
-  background-color: var(--purple);
-  border-color: var(--purple);
+  background-color: var(--purple-dark);
+  border-color: var(--purple-dark);
 }
 
 .checkbox input[type="checkbox"]:checked + label:after {
