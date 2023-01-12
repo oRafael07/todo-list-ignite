@@ -4,18 +4,22 @@ import { Trash } from 'phosphor-react'
 
 interface ITaskProps {
   id: string;
-  description: string,
-  isSelected: boolean
+  title: string,
+  isCompleted: boolean
   onDeleteTask: (id: string) => void;
-  onSelectTask: (event: ChangeEvent<HTMLInputElement>, id: string) => void;
+  onSelectTask: (id: string) => void;
 }
 
-export function Task({ description, isSelected, id, onDeleteTask, onSelectTask }: ITaskProps) {
+export function Task({ id, title, isCompleted, onDeleteTask, onSelectTask }: ITaskProps) {
   return (
     <div className={styles.task}>
-      <input type="checkbox" className={styles.input_selectd} onChange={(event) => onSelectTask(event, id)} />
-      <div className={isSelected ? styles.scratched : styles.content}>
-        {description}
+      <div className={styles.checkbox}>
+        <input type="checkbox" id={id} onChange={() => onSelectTask(id)} />
+        <label htmlFor={id}></label>
+      </div>
+      {/* <input type="checkbox" className={styles.input_selectd} onChange={() => onSelectTask(id)} /> */}
+      <div className={isCompleted ? styles.scratched : styles.content}>
+        {title}
       </div>
       <button className={styles.deleteTask} data-remove={id} onClick={() => onDeleteTask(id)}>
         <Trash size={24} />

@@ -4,12 +4,12 @@ import { Header } from './components/Header'
 import { InputNewTask } from './components/InputNewTask'
 import { Task } from './components/Task'
 import uuid from 'react-uuid'
-
+import clipboardLogo from './assets/clipboard.svg'
 
 interface ITask {
   id: string
-  description: string;
-  isSelected: boolean
+  title: string;
+  isCompleted: boolean
 }
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
       return
     }
 
-    setTasks([...tasks, { id: uuid(), description: taskText, isSelected: false }])
+    setTasks([...tasks, { id: uuid(), title: taskText, isCompleted: false }])
     setTaskText("")
   }
 
@@ -40,21 +40,19 @@ function App() {
     setTasks(tasksWithoutDeletedOne)
   }
 
-  function handleSelectTask(event: ChangeEvent<HTMLInputElement>, id: string) {
-    const TasksData = [...tasks]
-    const taskIndex = TasksData.findIndex(i => i.id === id)
-    const taskMark = TasksData.find(i => i.id === id)
-
-    if (taskMark === undefined) return
-
-    TasksData.splice(taskIndex, 1, {
-      id: taskMark.id,
-      description: taskMark.description,
-      isSelected: !taskMark.isSelected
+  function handleSelectTask(id: string) {
+    const newTasks = tasks.map(task => {
+      if(task.id === id){
+        return {...task, isCompleted: !task.isCompleted}
+      }
+      return {...task}
     })
 
-    setTasks(TasksData)
+    setTasks(newTasks)
   }
+
+  const countTotalTask = tasks.length
+  const countTaskCompleted = tasks.filter(task => task.isCompleted).length
 
   return (
     <React.Fragment>
@@ -69,12 +67,20 @@ function App() {
             </div>
             <div className={styles.info}>
               <p>Concluídas</p>
-              <span><p>{tasks.length > 0 ? tasks.length : "0"} de {tasks.length > 0 ? tasks.filter(i => i.isSelected === true).length : "0"}</p></span>
+              <span><p>{countTotalTask ? `${countTotalTask} de ${countTaskCompleted}` : '0'}</p></span>
             </div>
           </header>
-
+          {countTotalTask === 0 && (
+            <>
+              <div className={styles.tasks_empty}>
+                <img src={clipboardLogo} alt="" />
+                <p><b>Você ainda não tem tarefas cadastradas</b><br />
+                Crie tarefas e organize seus itens a fazer</p>
+              </div>
+            </>
+          )}
           {tasks.map(row => (
-            <Task key={row.id} description={row.description} isSelected={row.isSelected} id={row.id} onDeleteTask={handleDeleteTask} onSelectTask={handleSelectTask} />
+            <Task key={row.id} id={row.id} title={row.title} isCompleted={row.isCompleted} onDeleteTask={handleDeleteTask} onSelectTask={handleSelectTask} />
           ))}
         </div>
       </main>
