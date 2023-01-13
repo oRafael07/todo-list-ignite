@@ -9,12 +9,13 @@ interface IProps {
 }
 
 export function InputNewTask({ taskText, onCreateNewTask, onChangeTaskText }: IProps) {
+  const isEmptyInput = taskText ? false : true
 
   return (
     <div className={styles.container}>
       <form onSubmit={onCreateNewTask}>
         <input type="text" placeholder='Adicione uma nova tarefa' onChange={onChangeTaskText} value={taskText} />
-        <button type="submit" disabled={taskText ? false : true}>
+        <button type="submit" disabled={isEmptyInput}>
           Criar
           <PlusCircle size={20} />
         </button>
