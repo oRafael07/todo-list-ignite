@@ -20,10 +20,7 @@ function App() {
   function handleCreateNewTask(event: FormEvent) {
     event.preventDefault()
 
-
-    if (taskText === '') {
-      return
-    }
+    if (!taskText) return
 
     setTasks([...tasks, { id: uuid(), title: taskText, isCompleted: false }])
     setTaskText("")

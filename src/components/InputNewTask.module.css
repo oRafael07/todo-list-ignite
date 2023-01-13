@@ -36,3 +36,8 @@
   align-items: center;
   gap: 4px;
 }
+
+.container button:disabled {
+  cursor: unset;
+  filter: brightness(.9);
+}

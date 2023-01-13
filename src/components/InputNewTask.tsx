@@ -14,7 +14,7 @@ export function InputNewTask({ taskText, onCreateNewTask, onChangeTaskText }: IP
     <div className={styles.container}>
       <form onSubmit={onCreateNewTask}>
         <input type="text" placeholder='Adicione uma nova tarefa' onChange={onChangeTaskText} value={taskText} />
-        <button type="submit">
+        <button type="submit" disabled={taskText ? false : true}>
           Criar
           <PlusCircle size={20} />
         </button>
