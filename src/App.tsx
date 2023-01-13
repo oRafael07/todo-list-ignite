@@ -39,10 +39,10 @@ function App() {
 
   function handleSelectTask(id: string) {
     const newTasks = tasks.map(task => {
-      if(task.id === id){
-        return {...task, isCompleted: !task.isCompleted}
+      if (task.id === id) {
+        return { ...task, isCompleted: !task.isCompleted }
       }
-      return {...task}
+      return { ...task }
     })
 
     setTasks(newTasks)
@@ -72,12 +72,18 @@ function App() {
               <div className={styles.tasks_empty}>
                 <img src={clipboardLogo} alt="" />
                 <p><b>Você ainda não tem tarefas cadastradas</b><br />
-                Crie tarefas e organize seus itens a fazer</p>
+                  Crie tarefas e organize seus itens a fazer</p>
               </div>
             </>
           )}
-          {tasks.map(row => (
-            <Task key={row.id} id={row.id} title={row.title} isCompleted={row.isCompleted} onDeleteTask={handleDeleteTask} onSelectTask={handleSelectTask} />
+
+          {tasks.map(task => (
+            <Task
+              key={task.id}
+              data={task}
+              onDeleteTask={handleDeleteTask}
+              onSelectTask={handleSelectTask}
+            />
           ))}
         </div>
       </main>
